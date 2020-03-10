@@ -1,4 +1,4 @@
-package fr.android.moi.dancetracker;
+package fr.android.moi.projetandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
