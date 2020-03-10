@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">ProjetAndroid</string>
+    <string name="app_name">DanceTracker</string>
+    <string name="addBattle">Add a battle</string>
+    <string name="addBattleTitle">Add a new battle</string>
+    <string name="technique">Technique</string>
+    <string name="artistique">Artistique</string>
+    <string name="espace">Occupation de l\'espace</string>
+    <string name="style">Différents styles</string>
+    <string name="originalité">Originalité</string>
+    <string name="total">Total</string>
+    <string name="myTeam">My Team</string>
+    <string name="theOtherTeam">The Other Team</string>
+    <string name="round">Number of rounds</string>
+    <string name="matchTitle">Match</string>
+    <string name="winner">Winner</string>
 </resources>
