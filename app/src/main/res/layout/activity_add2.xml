@@ -117,41 +117,47 @@
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/tech1"/>
 
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/art1"/>
 
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/espace1"/>
 
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/style1"/>
 
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/original1"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:id="@+id/total1"/>
 
                 </LinearLayout>
 
@@ -246,41 +252,47 @@
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/tech2"/>
 
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/art2"/>
 
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/espace2"/>
 
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/style2"/>
 
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:entries="@array/score" />
+                        android:entries="@array/score"
+                        android:id="@+id/original2"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:id="@+id/total2"/>
 
                 </LinearLayout>
 
