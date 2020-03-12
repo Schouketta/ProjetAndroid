@@ -2,7 +2,9 @@ package fr.android.moi.projetandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -28,6 +30,28 @@ public class MainActivity extends AppCompatActivity {
         mListView.setAdapter(adapter);
     }
 
+    public void addOnClick(View view)
+    {
+        Intent intent = new Intent(this, Add.class);
+        startActivity(intent); //lance le passage à l'activity Add
+    }
 
+    public void historyOnClick(View view)
+    {
+        Intent intent = new Intent(this, History.class);
+        startActivity(intent); //lance le passage à l'activity History
+    }
+
+    public void cameraOnClick(View view)
+    {
+        Intent intent = new Intent(this, Camera.class);
+        startActivity(intent); //lance le passage à l'activity Camera
+    }
+
+    public void statsOnClick(View view)
+    {
+        Intent intent = new Intent(this, Stats.class);
+        startActivity(intent); //lance le passage à l'activity Camera
+    }
 
 }

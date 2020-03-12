@@ -9,12 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Match">
-        </activity>
-        <activity android:name=".Add2">
-        </activity>
-        <activity android:name=".Add">
-        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +16,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Add"
+            android:label="Add"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Add2"
+            android:label="Add"
+            android:parentActivityName=".Add" />
+        <activity
+            android:name=".Match"
+            android:label="Match"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".History"
+            android:label="History"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Camera"
+            android:label="Camera"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".Stats"
+            android:label="Statistiques"
+            android:parentActivityName=".MainActivity"></activity>
+
     </application>
 
 </manifest>
