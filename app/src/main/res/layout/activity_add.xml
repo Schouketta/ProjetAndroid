@@ -120,7 +120,7 @@
                         android:layout_gravity="center_vertical|center_horizontal"
                         android:text="@string/addBattle"
                         android:textColor="@color/white"
-                        android:background="@color/pink"
+                        android:background="@color/colorPrimary"
                         android:padding="10dp"
                         android:layout_marginTop="15dp"
                         />

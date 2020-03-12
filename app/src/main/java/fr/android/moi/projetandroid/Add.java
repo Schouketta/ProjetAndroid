@@ -14,6 +14,12 @@ public class Add extends AppCompatActivity {
     EditText myTeam, otherTeam;
     String nameTeam, nameOTeam;
 
+    public static final String EXTRA_TEAM_NAME =
+            "fr.android.moi.projetandroid.extra.TEAM_NAME";
+
+    public static final String EXTRA_TEAM_NAME_OTHER =
+            "fr.android.moi.projetandroid.extra.TEAM_NAME_OTHER";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,19 +30,24 @@ public class Add extends AppCompatActivity {
         otherTeam = (EditText) findViewById(R.id.otherTeam);
         btnAdd = (Button) findViewById(R.id.addBattle);
 
-        nameTeam = myTeam.getText().toString();
-        nameOTeam = otherTeam.getText().toString();
+
+
+        final Intent intent = new Intent(this, Add2.class);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (v == btnAdd) {
-                    Intent intent = new Intent(Add.this, Add2.class);
-                    intent.putExtra("myTeam", nameTeam);
-                    intent.putExtra("otherTeam", nameOTeam);
-                    startActivity(intent);
-                }
+
+                    nameTeam = myTeam.getText().toString();
+                    nameOTeam = otherTeam.getText().toString();
+                   intent.putExtra(EXTRA_TEAM_NAME, nameTeam);
+                   intent.putExtra(EXTRA_TEAM_NAME_OTHER, nameOTeam);
+                   startActivity(intent);
             }
         });
     }
+
+
+
+
 
 }
