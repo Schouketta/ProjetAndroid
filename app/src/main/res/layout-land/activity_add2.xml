@@ -6,8 +6,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pink"
+            android:isScrollContainer="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:text="@string/addBattleTitle"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
 
 
         <LinearLayout
@@ -17,76 +31,19 @@
             android:layout_marginTop="10dp"
             android:orientation="vertical">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@color/grey"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:text="Sarah vs Sara"/>
-
-
-                <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="bottom"
-                        android:text="@string/winner" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="bottom"
-                        android:text="@string/theOtherTeam" />
-                </LinearLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:text="13 - 11" />
-
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Localisation"
-                    android:id="@+id/btnMap"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:textColor="#FFFFFF"
-                    android:background="@color/colorPrimary"/>
-
-            </LinearLayout>
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
-                android:text="Round 1"
+                android:text="@string/myTeam"
                 android:textSize="20sp" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                android:background="#00A26E6E"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -94,14 +51,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="bottom"
-                        android:text="Teams"
-                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -163,57 +112,127 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="Sarah"/>
+                        android:entries="@array/score" />
 
-
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="1"/>
+                        android:entries="@array/score" />
 
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="1"/>
+                        android:entries="@array/score" />
 
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="1"/>
+                        android:entries="@array/score" />
 
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="1"/>
+                        android:entries="@array/score" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="1"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
 
                 </LinearLayout>
 
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:text="@string/theOtherTeam"
+                android:textSize="20sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:text="@string/technique"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:text="@string/artistique"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:text="@string/espace"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:text="@string/style"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:text="@string/originalité"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:text="@string/total"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -221,61 +240,68 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="Sara"/>
+                        android:entries="@array/score" />
 
-
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="1"/>
+                        android:entries="@array/score" />
 
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="1"/>
+                        android:entries="@array/score" />
 
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="1"/>
+                        android:entries="@array/score" />
 
-                    <TextView
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="1"/>
+                        android:entries="@array/score" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="1"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/addBattle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="@string/addBattle"
+                    android:textColor="@color/white"
+                    android:background="@color/pink"/>
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>
