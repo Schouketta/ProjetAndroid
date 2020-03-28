@@ -19,7 +19,7 @@ public class Match extends AppCompatActivity {
         btnMap = (Button) findViewById(R.id.btnMap);
 
 
-        final Intent intent = new Intent(this, Maps.class);
+        final Intent intent = new Intent(this, Geolocalisation.class);
         btnMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intent);

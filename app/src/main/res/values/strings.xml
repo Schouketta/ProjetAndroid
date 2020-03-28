@@ -13,5 +13,9 @@
     <string name="round">Number of rounds</string>
     <string name="matchTitle">Match</string>
     <string name="winner">Winner</string>
-    <string name="title_activity_maps">Map</string>
+
+    <!-- Sarah Fong--> <string name="title_activity_maps">Map</string>
+
+    <string name="title_activity_geolocalisation">Map</string>
+
 </resources>
