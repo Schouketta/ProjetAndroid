@@ -20,10 +20,14 @@ import android.widget.Toast;
 
 public class Camera extends AppCompatActivity {
 
+
     Button btnPrendrePhoto;
     ImageView imageViewCamera;
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
+
+    Button btnOpenGallery;
+    private static final int PICK_IMAGE = 100;
 
     Uri image_uri;
 
@@ -32,8 +36,9 @@ public class Camera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        imageViewCamera = findViewById(R.id.imageViewCamera);
-        btnPrendrePhoto = findViewById(R.id.btnPrendrePhoto);
+        imageViewCamera = (ImageView) findViewById(R.id.imageViewCamera);
+        btnPrendrePhoto = (Button) findViewById(R.id.btnPrendrePhoto);
+        btnOpenGallery = (Button) findViewById(R.id.btnOpenGallery);
 
         //Bouton click
         btnPrendrePhoto.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +70,20 @@ public class Camera extends AppCompatActivity {
                 }
             }
         });
+
+        btnOpenGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGallery();
+            }
+        });
     }
+
+    private void openGallery(){
+        Intent gallery = new Intent (Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
 
     private void openCamera(){
 
@@ -104,9 +122,17 @@ public class Camera extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
+        /*if(resultCode == RESULT_OK){
             //set the image captured to our ImageView
             imageViewCamera.setImageURI(image_uri);
+        }*/
+
+        //PICk_IMAGE sert à savoir si on a bien ouvert la galerie
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            //l'image sur laquelle on clique dans la galerie devient l'image selectionnée
+            image_uri=data.getData();
+            imageViewCamera.setImageURI(image_uri);
         }
+
     }
 }
