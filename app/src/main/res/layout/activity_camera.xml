@@ -4,12 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Camera">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="On ouvre la camera et on peut prendre des photos">
+    tools:context=".Camera"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-    </TextView>
+    <ImageView
+        android:id="@+id/imageViewCamera"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_image_black_24dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp" />
+
+    <!-- Bouton pour prendre une photo -->
+    <Button
+        android:id="@+id/btnPrendrePhoto"
+        android:text="Prendre Photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
