@@ -30,28 +30,7 @@ import androidx.core.content.ContextCompat;
 
 public class Geolocalisation extends AppCompatActivity implements OnMapReadyCallback {
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "onMapReady: map is ready");
-        mMap = googleMap;
-
-        if (mLocationPermissionsGranted) {
-            getDeviceLocation();
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-            mMap.setMyLocationEnabled(true);
-            mMap.getUiSettings().setMyLocationButtonEnabled(false);
-
-        }
-    }
-
     private static final String TAG = "MapActivity";
-
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
@@ -61,6 +40,7 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,19 +50,84 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
         getLocationPermission();
     }
 
+    /*
+    getLocationPermission() demande la permission d'utiliser la localisation
+    FINE_LOCATION et COURSE_LOCATION
+     */
+    private void getLocationPermission(){
+        Log.d(TAG, "getLocationPermission: getting location permissions");
+        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION};
+
+        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        {
+            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            {
+                mLocationPermissionsGranted = true;
+                initMap();
+            }
+            else {
+                ActivityCompat.requestPermissions(this,
+                        permissions,
+                        LOCATION_PERMISSION_REQUEST_CODE);
+            }
+        }else{
+            ActivityCompat.requestPermissions(this,
+                    permissions,
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    private void initMap(){
+        Log.d(TAG, "initMap: initializing map");
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_maps);
+
+        mapFragment.getMapAsync(Geolocalisation.this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onMapReady: map is ready");
+        mMap = googleMap;
+
+        if (mLocationPermissionsGranted)
+        {
+            //Pour avoir la localisation du téléphone
+            getDeviceLocation();
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
+                return;
+            }
+            mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
+        }
+    }
+
     private void getDeviceLocation(){
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         try{
-            if(mLocationPermissionsGranted){
-
+            if(mLocationPermissionsGranted)
+            {
+                //get localisation de mon tél
                 final Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
+
+                    //OnComplete quand la tache est terminée
                     @Override
                     public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
+                        //si la tache a été accomplie avec succès
+                        if(task.isSuccessful())
+                        {
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
 
@@ -106,36 +151,8 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
-    private void initMap(){
-        Log.d(TAG, "initMap: initializing map");
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_maps);
 
-        mapFragment.getMapAsync(Geolocalisation.this);
-    }
-
-    private void getLocationPermission(){
-        Log.d(TAG, "getLocationPermission: getting location permissions");
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION};
-
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                mLocationPermissionsGranted = true;
-                initMap();
-            }else{
-                ActivityCompat.requestPermissions(this,
-                        permissions,
-                        LOCATION_PERMISSION_REQUEST_CODE);
-            }
-        }else{
-            ActivityCompat.requestPermissions(this,
-                    permissions,
-                    LOCATION_PERMISSION_REQUEST_CODE);
-        }
-    }
-
+    //Si l'utilisateur refuse l'autorisation pour la permission
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.d(TAG, "onRequestPermissionsResult: called.");
@@ -143,12 +160,14 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
 
         switch(requestCode){
             case LOCATION_PERMISSION_REQUEST_CODE:{
-                if(grantResults.length > 0){
+                if(grantResults.length > 0)
+                {
                     for(int i = 0; i < grantResults.length; i++){
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED)
+                        {
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
-                            return;
+                            return; //on quitte la méthode
                         }
                     }
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
@@ -159,6 +178,5 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
             }
         }
     }
-
 
 }
