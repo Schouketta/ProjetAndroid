@@ -97,6 +97,7 @@ public class Camera extends AppCompatActivity {
         startActivityForResult(cameraIntent,IMAGE_CAPTURE_CODE);
     }
 
+
     //Gestion permission result
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
