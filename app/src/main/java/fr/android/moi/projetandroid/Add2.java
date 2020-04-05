@@ -2,7 +2,9 @@ package fr.android.moi.projetandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +32,8 @@ public class Add2 extends AppCompatActivity {
     Spinner tech2, art2, espace2, style2, original2;
     String Stech2, Sart2, Sespace2, Sstyle2, Soriginal2;
 
-    public static SQLiteHelper sqLiteHelper;
+    //public static SQLiteHelper sqLiteHelper;
+    private SQLite.FeedReaderDbHelper DB;
 
     /*public void myClickHandler(View view) {
 
@@ -86,6 +89,8 @@ public class Add2 extends AppCompatActivity {
         team1.setText(nameTeam1);
         team2.setText(nameTeam2);
 
+        DB = new SQLite.FeedReaderDbHelper(getApplicationContext());
+
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -111,7 +116,32 @@ public class Add2 extends AppCompatActivity {
                 String Scal2 = Integer.toString(cal2);
                 Log.d("total2", Scal2);
 
-                try {
+
+                // Gets the data repository in write mode
+                SQLiteDatabase db = DB.getWritableDatabase();
+
+                // Create a new map of values, where column names are the keys
+                ContentValues values = new ContentValues();
+                values.put(SQLite.FeedEntry.COLUMN_NAME_MY_TEAM, nameTeam1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_OTHER_TEAM, nameTeam2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_TECH_1, Stech1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ART_1, Sart1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ESPACE_1, Sespace1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_STYLE_1, Sstyle1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ORIGINALITE_1, Soriginal1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_TOTAL_1, Scal1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_TECH_2, Stech2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ART_2, Sart2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ESPACE_2, Sespace2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_STYLE_2, Sstyle2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ORIGINALITE_2, Soriginal2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_TOTAL_2, Scal2);
+
+                // Insert the new row, returning the primary key value of the new row
+                long newRowId = db.insert(SQLite.FeedEntry.TABLE_NAME, null, values);
+                Toast.makeText(getApplicationContext(), "Battle added successfully!", Toast.LENGTH_SHORT).show();
+
+                /*try {
                     sqLiteHelper.insertData(
                             nameTeam1.trim(),
                             nameTeam2.trim(),
@@ -132,7 +162,7 @@ public class Add2 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Added Succesfully!", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 Intent intent = new Intent(Add2.this, Match.class);
                 startActivity(intent);
@@ -140,10 +170,10 @@ public class Add2 extends AppCompatActivity {
             }
         });
 
-        sqLiteHelper = new SQLiteHelper(this, "battleDB.sqlite", null, 1);
-        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS BATTLE (Id INTEGER PRIMARY KEY AUTOINCREMENT, myTeamName VARCHAR, otherTeamName VARCHAR, nbRounds VARCHAR," +
+        //sqLiteHelper = new SQLiteHelper(this, "battleDB.sqlite", null, 1);
+        /*sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS BATTLE (Id INTEGER PRIMARY KEY AUTOINCREMENT, myTeamName VARCHAR, otherTeamName VARCHAR, nbRounds VARCHAR," +
                 "tech1 VARCHAR, art1 VARCHAR, espace1 VARCHAR, style1 VARCHAR, originalite1 VARCHAR, total1 VARCHAR," +
-                "tech2 VARCHAR, art2 VARCHAR, espace2 VARCHAR, style2 VARCHAR, originalite2 VARCHAR, total2 VARCHAR)");
+                "tech2 VARCHAR, art2 VARCHAR, espace2 VARCHAR, style2 VARCHAR, originalite2 VARCHAR, total2 VARCHAR)");*/
     }
 }
 
