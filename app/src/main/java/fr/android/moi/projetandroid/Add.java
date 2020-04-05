@@ -1,5 +1,7 @@
 package fr.android.moi.projetandroid;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,6 +23,7 @@ public class Add extends AppCompatActivity {
             "fr.android.moi.projetandroid.extra.TEAM_NAME_OTHER";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,23 +34,20 @@ public class Add extends AppCompatActivity {
         btnAdd = (Button) findViewById(R.id.addBattle);
 
 
-
         final Intent intent = new Intent(this, Add2.class);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                    nameTeam = myTeam.getText().toString();
-                    nameOTeam = otherTeam.getText().toString();
-                   intent.putExtra(EXTRA_TEAM_NAME, nameTeam);
-                   intent.putExtra(EXTRA_TEAM_NAME_OTHER, nameOTeam);
-                   startActivity(intent);
+               nameTeam = myTeam.getText().toString();
+               nameOTeam = otherTeam.getText().toString();
+               intent.putExtra(EXTRA_TEAM_NAME, nameTeam);
+               intent.putExtra(EXTRA_TEAM_NAME_OTHER, nameOTeam);
+               startActivity(intent);
             }
         });
+
+
     }
-
-
-
-
 
 }
