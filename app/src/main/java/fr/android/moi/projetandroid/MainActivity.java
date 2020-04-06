@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import static fr.android.moi.projetandroid.SQLite.FeedEntry.TABLE_NAME;
+import static android.provider.BaseColumns._ID;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = DB.getReadableDatabase();
 
         Cursor cursor = DB.getData();
+        
         while(cursor.moveToNext()){
             String myTeamName = cursor.getString(1);
             String otherTeamName = cursor.getString(2);

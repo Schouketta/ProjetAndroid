@@ -80,6 +80,15 @@ public class SQLite {
             Cursor data = db.rawQuery(query, null);
             return data;
         }
+
+        public Cursor deleteData(){
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "DELETE FROM battleDB WHERE rowid IN (SELECT rowid FROM battleDB LIMIT 1)";
+            Cursor data = db.rawQuery(query, null);
+            db.execSQL(query);
+            return data;
+        }
+
     }
 
 }

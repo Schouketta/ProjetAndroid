@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -140,6 +141,13 @@ public class Add2 extends AppCompatActivity {
                 // Insert the new row, returning the primary key value of the new row
                 long newRowId = db.insert(SQLite.FeedEntry.TABLE_NAME, null, values);
                 Toast.makeText(getApplicationContext(), "Battle added successfully!", Toast.LENGTH_SHORT).show();
+
+                Cursor cursor = DB.getData();
+
+                while (cursor.getCount() > 5 && cursor.getCount() != 5){
+                    cursor = DB.deleteData();
+                    cursor = DB.getData();
+                }
 
                 /*try {
                     sqLiteHelper.insertData(
