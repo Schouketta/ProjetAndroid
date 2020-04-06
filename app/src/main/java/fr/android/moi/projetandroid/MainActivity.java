@@ -20,28 +20,31 @@ public class MainActivity extends AppCompatActivity {
     private SQLite.FeedReaderDbHelper DB;
 
     ListView mListView;
-    //ArrayList<String> list = new ArrayList<String>();
-    private ArrayList<String> prenoms = new ArrayList<String>();
+    ArrayList<String> list = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //SQLiteDatabase db = DB.getReadableDatabase();
+        DB = new SQLite.FeedReaderDbHelper(getApplicationContext());
 
-        prenoms.add("Sarah");
-        prenoms.add("Ella");
+        SQLiteDatabase db = DB.getReadableDatabase();
 
-        /*Cursor cursor = DB.getData();
+        Cursor cursor = DB.getData();
         while(cursor.moveToNext()){
+            String myTeamName = cursor.getString(1);
             String otherTeamName = cursor.getString(2);
-            list.add(otherTeamName);
-        }*/
+            String total1 = cursor.getString(8);
+            String total2 = cursor.getString(14);
+
+            String message = myTeamName + " vs " + otherTeamName + " | score : " + total1 + " - " + total2;
+            list.add(message);
+        }
 
         mListView = (ListView) findViewById(R.id.listView);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_list_item_1, prenoms);
+                android.R.layout.simple_list_item_1, list);
         mListView.setAdapter(adapter);
     }
 
