@@ -2,7 +2,10 @@ package fr.android.moi.projetandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +32,8 @@ public class Add2 extends AppCompatActivity {
     String Stech1, Sart1, Sespace1, Sstyle1, Soriginal1;
     Spinner tech2, art2, espace2, style2, original2;
     String Stech2, Sart2, Sespace2, Sstyle2, Soriginal2;
+
+    private SQLite.FeedReaderDbHelper DB;
 
     /*public void myClickHandler(View view) {
 
@@ -77,12 +82,14 @@ public class Add2 extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String nameTeam1 = intent.getStringExtra(Add.EXTRA_TEAM_NAME);
-        String nameTeam2 = intent.getStringExtra(Add.EXTRA_TEAM_NAME_OTHER);
+        final String nameTeam1 = intent.getStringExtra(Add.EXTRA_TEAM_NAME);
+        final String nameTeam2 = intent.getStringExtra(Add.EXTRA_TEAM_NAME_OTHER);
         Toast.makeText(this, nameTeam1, Toast.LENGTH_SHORT).show();
 
         team1.setText(nameTeam1);
         team2.setText(nameTeam2);
+
+        DB = new SQLite.FeedReaderDbHelper(getApplicationContext());
 
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +102,8 @@ public class Add2 extends AppCompatActivity {
                 Soriginal1 = original1.getSelectedItem().toString();
 
                 int cal1 = Integer.parseInt(Stech1) + Integer.parseInt(Sart1) + Integer.parseInt(Sespace1) + Integer.parseInt(Sstyle1) + Integer.parseInt(Soriginal1);
-                Log.d("total1", Integer.toString(cal1));
+                String Scal1 = Integer.toString(cal1);
+                Log.d("total1", Scal1);
 
 
                 Stech2 = tech2.getSelectedItem().toString();
@@ -105,13 +113,53 @@ public class Add2 extends AppCompatActivity {
                 Soriginal2 = original2.getSelectedItem().toString();
 
                 int cal2 = Integer.parseInt(Stech2) + Integer.parseInt(Sart2) + Integer.parseInt(Sespace2) + Integer.parseInt(Sstyle2) + Integer.parseInt(Soriginal2);
-                Log.d("total2", Integer.toString(cal2));
+                String Scal2 = Integer.toString(cal2);
+                Log.d("total2", Scal2);
 
+
+                // Gets the data repository in write mode
+                SQLiteDatabase db = DB.getWritableDatabase();
+
+                // Create a new map of values, where column names are the keys
+                ContentValues values = new ContentValues();
+                values.put(SQLite.FeedEntry.COLUMN_NAME_MY_TEAM, nameTeam1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_OTHER_TEAM, nameTeam2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_TECH_1, Stech1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ART_1, Sart1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ESPACE_1, Sespace1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_STYLE_1, Sstyle1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ORIGINALITE_1, Soriginal1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_TOTAL_1, Scal1);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_TECH_2, Stech2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ART_2, Sart2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ESPACE_2, Sespace2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_STYLE_2, Sstyle2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_ORIGINALITE_2, Soriginal2);
+                values.put(SQLite.FeedEntry.COLUMN_NAME_TOTAL_2, Scal2);
+                Log.d("tech1", Stech1);
+                Log.d("tech2", Stech2);
+
+                // Insert the new row, returning the primary key value of the new row
+                long newRowId = db.insert(SQLite.FeedEntry.TABLE_NAME, null, values);
+                Toast.makeText(getApplicationContext(), "Battle added successfully!", Toast.LENGTH_SHORT).show();
+
+                Cursor cursor = DB.getData();
+
+                while (cursor.getCount() > 5 && cursor.getCount() != 5){
+                    cursor = DB.deleteData();
+                    cursor = DB.getData();
+                }
 
                 Intent intent = new Intent(Add2.this, Match.class);
+                intent.putExtra("myTeamName", nameTeam1);
+                intent.putExtra("otherTeamName", nameTeam2);
+                intent.putExtra("total1", Scal1);
+                intent.putExtra("total2", Scal2);
                 startActivity(intent);
 
             }
         });
+
     }
 }
+
