@@ -20,6 +20,7 @@ public class Match extends AppCompatActivity {
 
     Button btnMap;
     private SQLite.FeedReaderDbHelper DB;
+    TextView score, winner, teams;
     TextView team1, tech1, art1, espace1, style1, original1, cal1;
     TextView team2, tech2, art2, espace2, style2, original2, cal2;
 
@@ -29,6 +30,10 @@ public class Match extends AppCompatActivity {
         setContentView(R.layout.activity_match);
 
         btnMap = (Button) findViewById(R.id.btnMap);
+        score = (TextView) findViewById(R.id.score);
+        winner = (TextView) findViewById(R.id.winner);
+        teams = (TextView) findViewById(R.id.teams);
+
         team1 = (TextView) findViewById(R.id.myTeamName);
         team2 = (TextView) findViewById(R.id.otherTeamName);
 
@@ -82,7 +87,25 @@ public class Match extends AppCompatActivity {
             style2.setText(cursor.getString(12));
             original2.setText(cursor.getString(13));
             cal2.setText(cursor.getString(14));
+
+            String Sscore = cursor.getString(8) + " - " + cursor.getString(14);
+            score.setText(Sscore);
+            String Steams = cursor.getString(1) + " vs " + cursor.getString(2);
+            teams.setText(Steams);
+
+            if(Integer.parseInt(cursor.getString(8)) > Integer.parseInt(cursor.getString(14)) ){
+                winner.setText(cursor.getString(1));
+            }
+            else if(Integer.parseInt(cursor.getString(14)) > Integer.parseInt(cursor.getString(8))){
+                winner.setText(cursor.getString(2));
+            }
+            else if(Integer.parseInt(cursor.getString(14)) == Integer.parseInt(cursor.getString(8))){
+                winner.setText("EX AEQUO");
+            }
+
         }
+
+
 
 
         final Intent intent = new Intent(this, Maps.class);
