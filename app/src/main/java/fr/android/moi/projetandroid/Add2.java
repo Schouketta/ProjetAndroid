@@ -137,6 +137,8 @@ public class Add2 extends AppCompatActivity {
                 values.put(SQLite.FeedEntry.COLUMN_NAME_STYLE_2, Sstyle2);
                 values.put(SQLite.FeedEntry.COLUMN_NAME_ORIGINALITE_2, Soriginal2);
                 values.put(SQLite.FeedEntry.COLUMN_NAME_TOTAL_2, Scal2);
+                Log.d("tech1", Stech1);
+                Log.d("tech2", Stech2);
 
                 // Insert the new row, returning the primary key value of the new row
                 long newRowId = db.insert(SQLite.FeedEntry.TABLE_NAME, null, values);

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 public class SQLite {
 
@@ -81,12 +82,28 @@ public class SQLite {
             return data;
         }
 
+        public Cursor getDataForMatch(String myTeamName1, String otherTeamName1){
+            SQLiteDatabase db = this.getWritableDatabase();
+            //String query = "SELECT * FROM battleDB WHERE myTeamName = '" + myTeamName1 + "' AND otherTeamName = '" + otherTeamName1 + "' AND total1 = '" + total11 + "' AND total2 = '" + total21 + "'";
+            String query = "SELECT * FROM battleDB WHERE myTeamName = '" + myTeamName1 + "' AND otherTeamName = '" + otherTeamName1 + "'";
+            Cursor data = db.rawQuery(query, null);
+            return data;
+        }
+
         public Cursor deleteData(){
             SQLiteDatabase db = this.getWritableDatabase();
             String query = "DELETE FROM battleDB WHERE rowid IN (SELECT rowid FROM battleDB LIMIT 1)";
             Cursor data = db.rawQuery(query, null);
             db.execSQL(query);
             return data;
+        }
+
+        public Cursor getLeo(){
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "SELECT tech1 FROM battleDB WHERE myTeamName = 'lea' AND otherTeamName = 'leo'";
+            Cursor leolea = db.rawQuery(query, null);
+            return leolea;
+
         }
 
     }

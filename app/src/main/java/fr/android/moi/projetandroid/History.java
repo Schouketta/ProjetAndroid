@@ -21,7 +21,6 @@ public class History extends AppCompatActivity {
             "Yann", "Zoé"
     };
 
-    //private SQLite.FeedReaderDbHelper DB;
 
 
     @Override
@@ -29,34 +28,6 @@ public class History extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-
-        /*SQLiteDatabase db = DB.getReadableDatabase();
-
-        // Define a projection that specifies which columns from the database
-        // you will actually use after this query.
-        String[] projection = {
-                SQLite.FeedEntry.COLUMN_NAME_OTHER_TEAM
-        };
-
-        // Filter results WHERE "title" = 'My Title'
-        String selection = "";
-        String[] selectionArgs = {};
-
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                SQLite.FeedEntry.COLUMN_NAME_OTHER_TEAM + " DESC";
-
-        Cursor cursor = db.query(
-                SQLite.FeedEntry.TABLE_NAME,   // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                selection,              // The columns for the WHERE clause
-                selectionArgs,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                sortOrder               // The sort order
-        );
-
-        Log.d("cursor", cursor.getString(0));*/
 
 
         mListView2 = (ListView) findViewById(R.id.listView2);

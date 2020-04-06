@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = DB.getReadableDatabase();
 
         Cursor cursor = DB.getData();
-        
+
         while(cursor.moveToNext()){
             String myTeamName = cursor.getString(1);
             String otherTeamName = cursor.getString(2);
@@ -48,7 +49,68 @@ public class MainActivity extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
                 android.R.layout.simple_list_item_1, list);
         mListView.setAdapter(adapter);
+
+        /*cursor = DB.getLeo();
+
+        while(cursor.moveToNext()){
+
+            Log.d("techTest", cursor.getString(0));
+            //Log.d("techTest1", cursor.getString(1));
+
+        }*/
+
+
+
+        while(cursor.moveToNext()){
+            String myTeamName = cursor.getString(1);
+            String otherTeamName = cursor.getString(2);
+            String total1 = cursor.getString(8);
+            String total2 = cursor.getString(14);
+
+            String message = myTeamName + " vs " + otherTeamName + " | score : " + total1 + " - " + total2;
+            list.add(message);
+        }
+
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
+                String message = adapterView.getItemAtPosition(i).toString();
+
+                String[] separated = message.split("\\|");
+                String danseurs = separated[0].trim(); // this will contain "Fruit"
+                String score = separated[1].trim(); // this will contain " they taste good"
+
+                String[] separatedDanseurs = danseurs.split("vs");
+                String myTeamName = separatedDanseurs[0].trim(); // this will contain "Fruit"
+                String otherTeamName = separatedDanseurs[1].trim(); // this will contain " they taste good"
+
+                String[] separatedScore = score.split("\\-");
+                String total = separatedScore[0].trim(); // this will contain "Fruit"
+                String total2 = separatedScore[1].trim(); // this will contain " they taste good"
+
+                String[] separatedTotal1 = total.split(":");
+                total = separatedScore[0].trim(); // this will contain "Fruit"
+                String total1 = separatedScore[1].trim(); // this will contain " they taste good"
+                /*Log.d("message", message);
+                Log.d("danseurs", danseurs);
+                Log.d("score", score);
+                Log.d("myTeamName", myTeamName);
+                Log.d("otherTeamName", otherTeamName);
+                Log.d("total1", total1);
+                Log.d("total2", total2);*/
+
+                Intent intent = new Intent(MainActivity.this, Match.class);
+                intent.putExtra("myTeamName", myTeamName);
+                intent.putExtra("otherTeamName", otherTeamName);
+                intent.putExtra("total1", total1);
+                intent.putExtra("total2", total2);
+                startActivity(intent); //lance le passage à l'activity Match
+            }
+        });
     }
+
+
 
     public void addOnClick(View view)
     {
