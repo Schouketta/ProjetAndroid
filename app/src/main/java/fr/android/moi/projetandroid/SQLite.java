@@ -106,6 +106,15 @@ public class SQLite {
 
         }
 
+        /*cursor = DB.getLeo();
+
+        while(cursor.moveToNext()){
+
+            Log.d("techTest", cursor.getString(0));
+            //Log.d("techTest1", cursor.getString(1));
+
+        }*/
+
     }
 
 }

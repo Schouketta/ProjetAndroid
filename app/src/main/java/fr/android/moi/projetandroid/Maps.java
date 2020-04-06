@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import fr.android.moi.projetandroid.R;
 
-public class Maps extends FragmentActivity implements OnMapReadyCallback {
+/*public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
@@ -76,7 +76,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
-     */
+     *
 
     public void onMapReady(GoogleMap googleMap, Location location) {
         int lat = (int) (location.getLatitude());
@@ -89,4 +89,4 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
-}
+}*/

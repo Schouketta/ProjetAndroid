@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             String total1 = cursor.getString(8);
             String total2 = cursor.getString(14);
 
-            String message = myTeamName + " vs " + otherTeamName + " | score : " + total1 + " - " + total2;
+            String message = myTeamName + " vs " + otherTeamName + "\n| Score : " + total1 + " - " + total2;
             list.add(message);
         }
 
@@ -49,27 +49,6 @@ public class MainActivity extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
                 android.R.layout.simple_list_item_1, list);
         mListView.setAdapter(adapter);
-
-        /*cursor = DB.getLeo();
-
-        while(cursor.moveToNext()){
-
-            Log.d("techTest", cursor.getString(0));
-            //Log.d("techTest1", cursor.getString(1));
-
-        }*/
-
-
-
-        while(cursor.moveToNext()){
-            String myTeamName = cursor.getString(1);
-            String otherTeamName = cursor.getString(2);
-            String total1 = cursor.getString(8);
-            String total2 = cursor.getString(14);
-
-            String message = myTeamName + " vs " + otherTeamName + " | score : " + total1 + " - " + total2;
-            list.add(message);
-        }
 
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
