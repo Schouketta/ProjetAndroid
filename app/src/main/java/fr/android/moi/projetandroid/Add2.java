@@ -33,7 +33,6 @@ public class Add2 extends AppCompatActivity {
     Spinner tech2, art2, espace2, style2, original2;
     String Stech2, Sart2, Sespace2, Sstyle2, Soriginal2;
 
-    //public static SQLiteHelper sqLiteHelper;
     private SQLite.FeedReaderDbHelper DB;
 
     /*public void myClickHandler(View view) {
