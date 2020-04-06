@@ -151,39 +151,16 @@ public class Add2 extends AppCompatActivity {
                     cursor = DB.getData();
                 }
 
-                /*try {
-                    sqLiteHelper.insertData(
-                            nameTeam1.trim(),
-                            nameTeam2.trim(),
-                            nameTeam2.trim(),
-                            Stech1.trim(),
-                            Sart1.trim(),
-                            Sespace1.trim(),
-                            Sstyle1.trim(),
-                            Soriginal1.trim(),
-                            Scal1.trim(),
-                            Stech2.trim(),
-                            Sart2.trim(),
-                            Sespace2.trim(),
-                            Sstyle2.trim(),
-                            Soriginal2.trim(),
-                            Scal2.trim()
-                    );
-                    Toast.makeText(getApplicationContext(), "Added Succesfully!", Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
-
                 Intent intent = new Intent(Add2.this, Match.class);
+                intent.putExtra("myTeamName", nameTeam1);
+                intent.putExtra("otherTeamName", nameTeam2);
+                intent.putExtra("total1", Scal1);
+                intent.putExtra("total2", Scal2);
                 startActivity(intent);
 
             }
         });
 
-        //sqLiteHelper = new SQLiteHelper(this, "battleDB.sqlite", null, 1);
-        /*sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS BATTLE (Id INTEGER PRIMARY KEY AUTOINCREMENT, myTeamName VARCHAR, otherTeamName VARCHAR, nbRounds VARCHAR," +
-                "tech1 VARCHAR, art1 VARCHAR, espace1 VARCHAR, style1 VARCHAR, originalite1 VARCHAR, total1 VARCHAR," +
-                "tech2 VARCHAR, art2 VARCHAR, espace2 VARCHAR, style2 VARCHAR, originalite2 VARCHAR, total2 VARCHAR)");*/
     }
 }
 
