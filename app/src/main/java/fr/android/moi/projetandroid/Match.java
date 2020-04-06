@@ -108,10 +108,10 @@ public class Match extends AppCompatActivity {
 
 
 
-        final Intent intent = new Intent(this, Geolocalisation.class);
+        final Intent intent2 = new Intent(this, Geolocalisation.class);
         btnMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(intent);
+                startActivity(intent2);
             }
         });
 

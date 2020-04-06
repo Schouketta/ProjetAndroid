@@ -38,9 +38,6 @@
         <activity
             android:name=".Geolocalisation"
             android:label="@string/title_activity_geolocalisation"></activity>
-        <activity
-            android:name=".Maps"
-            android:label="@string/title_activity_maps"></activity>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -61,10 +58,6 @@
             android:name=".Match"
             android:label="Match"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".Maps"
-            android:label="@string/title_activity_maps"
-            android:parentActivityName=".Match"/>
         <activity
             android:name=".History"
             android:label="History"
