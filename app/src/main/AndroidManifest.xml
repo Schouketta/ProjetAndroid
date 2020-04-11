@@ -37,7 +37,8 @@
 
         <activity
             android:name=".Geolocalisation"
-            android:label="@string/title_activity_geolocalisation"></activity>
+            android:label="@string/title_activity_geolocalisation"
+            android:parentActivityName=".Camera"></activity>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -65,7 +66,7 @@
         <activity
             android:name=".Camera"
             android:label="Camera"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Add2" />
         <activity
             android:name=".Stats"
             android:label="Statistiques"

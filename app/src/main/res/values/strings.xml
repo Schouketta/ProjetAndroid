@@ -17,5 +17,13 @@
     <!-- Sarah Fong--> <string name="title_activity_maps">Map</string>
 
     <string name="title_activity_geolocalisation">Map</string>
+    <string name="prendre_photo">Prendre Photo</string>
+    <string name="ouvrir_photo_gallery">Ouvrir Photo Gallery</string>
+    <string name="suivant">Suivant</string>
+    <string name="sauvegarder_battle">Sauvegarder Battle</string>
+    <string name="teams">Teams</string>
+    <string name="team1">Team1</string>
+    <string name="error">error</string>
+    <string name="battle">Battle</string>
 
 </resources>
