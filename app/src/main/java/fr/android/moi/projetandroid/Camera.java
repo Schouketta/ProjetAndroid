@@ -22,12 +22,15 @@ public class Camera extends AppCompatActivity {
 
 
     Button btnPrendrePhoto;
+    Button btnSuivant;
     ImageView imageViewCamera;
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
 
     Button btnOpenGallery;
     private static final int PICK_IMAGE = 100;
+
+    Intent intent;
 
     Uri image_uri;
 
@@ -39,6 +42,19 @@ public class Camera extends AppCompatActivity {
         imageViewCamera = (ImageView) findViewById(R.id.imageViewCamera);
         btnPrendrePhoto = (Button) findViewById(R.id.btnPrendrePhoto);
         btnOpenGallery = (Button) findViewById(R.id.btnOpenGallery);
+        btnSuivant = (Button) findViewById(R.id.btnSuivant);
+
+        //On fait passer toutes les valeurs qu'on va vouloir save
+        intent = getIntent();
+
+        //BoutonSuivant
+        btnSuivant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToGeoloc();
+
+            }
+        });
 
         //Bouton click
         btnPrendrePhoto.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +150,27 @@ public class Camera extends AppCompatActivity {
             image_uri=data.getData();
             imageViewCamera.setImageURI(image_uri);
         }
+
+    }
+
+    public void goToGeoloc(){
+        Intent intent_from_Camera_to_Geoloc = new Intent(this, Geolocalisation.class);
+        intent_from_Camera_to_Geoloc.putExtra(Add.EXTRA_TEAM_NAME, intent.getStringExtra(Add.EXTRA_TEAM_NAME));
+        intent_from_Camera_to_Geoloc.putExtra(Add.EXTRA_TEAM_NAME_OTHER, intent.getStringExtra(Add.EXTRA_TEAM_NAME_OTHER));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_TECH1, intent.getStringExtra(Add2.EXTRA_TECH1));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_TECH2, intent.getStringExtra(Add2.EXTRA_TECH2));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_TOTAL1, intent.getStringExtra(Add2.EXTRA_TOTAL1));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_TOTAL2, intent.getStringExtra(Add2.EXTRA_TOTAL2));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_ESPACE1, intent.getStringExtra(Add2.EXTRA_ESPACE1));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_ESPACE2, intent.getStringExtra(Add2.EXTRA_ESPACE2));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_ART1, intent.getStringExtra(Add2.EXTRA_ART1));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_ART2, intent.getStringExtra(Add2.EXTRA_ART2));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_ORIGINAL1, intent.getStringExtra(Add2.EXTRA_ORIGINAL1));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_ORIGINAL2, intent.getStringExtra(Add2.EXTRA_ORIGINAL2));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_STYLE1, intent.getStringExtra(Add2.EXTRA_STYLE1));
+        intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_STYLE2, intent.getStringExtra(Add2.EXTRA_STYLE2));
+        startActivity(intent_from_Camera_to_Geoloc);
+
 
     }
 }

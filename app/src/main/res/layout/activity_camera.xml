@@ -18,14 +18,21 @@
     <!-- Bouton pour prendre une photo -->
     <Button
         android:id="@+id/btnPrendrePhoto"
-        android:text="Prendre Photo"
+        android:text="@string/prendre_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btnOpenGallery"
-        android:text="Ouvrir Photo Gallery"
+        android:text="@string/ouvrir_photo_gallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnSuivant"
+        android:text="@string/suivant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"/>
 
 </LinearLayout>

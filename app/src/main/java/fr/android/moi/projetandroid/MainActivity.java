@@ -80,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("total2", total2);*/
 
                 Intent intent = new Intent(MainActivity.this, Match.class);
-                intent.putExtra("myTeamName", myTeamName);
-                intent.putExtra("otherTeamName", otherTeamName);
-                intent.putExtra("total1", total1);
-                intent.putExtra("total2", total2);
+                intent.putExtra(Add.EXTRA_TEAM_NAME, myTeamName);
+                intent.putExtra(Add.EXTRA_TEAM_NAME_OTHER, otherTeamName);
+                //intent.putExtra("total1", total1);
+                //intent.putExtra("total2", total2);
                 startActivity(intent); //lance le passage à l'activity Match
             }
         });
