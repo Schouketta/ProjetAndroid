@@ -30,6 +30,9 @@ public class SQLite {
         public static final String COLUMN_NAME_STYLE_2 = "style2";
         public static final String COLUMN_NAME_ORIGINALITE_2 = "originalite2";
         public static final String COLUMN_NAME_TOTAL_2 = "total2";
+        public static final String COLUMN_NAME_LATITUDE = "latitude";
+        public static final String COLUMN_NAME_LONGITUDE = "longitude";
+
     }
 
     private static final String SQL_CREATE_ENTRIES =
@@ -48,7 +51,10 @@ public class SQLite {
                     FeedEntry.COLUMN_NAME_ESPACE_2 + " TEXT," +
                     FeedEntry.COLUMN_NAME_STYLE_2 + " TEXT," +
                     FeedEntry.COLUMN_NAME_ORIGINALITE_2 + " TEXT," +
-                    FeedEntry.COLUMN_NAME_TOTAL_2 + " TEXT)";
+                    FeedEntry.COLUMN_NAME_TOTAL_2 + " TEXT," +
+                    FeedEntry.COLUMN_NAME_LATITUDE + " TEXT," +
+                    FeedEntry.COLUMN_NAME_LONGITUDE + " TEXT)"
+            ;
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;

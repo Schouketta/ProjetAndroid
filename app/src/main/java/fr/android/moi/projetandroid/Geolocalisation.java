@@ -36,6 +36,7 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
 
+
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
@@ -133,6 +134,7 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
 
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM);
+
 
                         }else{
                             Log.d(TAG, "onComplete: current location is null");

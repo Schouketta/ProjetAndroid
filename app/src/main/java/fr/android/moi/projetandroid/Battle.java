@@ -17,9 +17,11 @@ public class Battle {
     private String style2;
     private String originalite2;
     private String total2;
+    private String latitude;
+    private String longitude;
 
 
-    public Battle(int id, String myTameName, String otherTeamName, String nbRounds, String tech1, String art1, String espace1, String style1, String originalite1, String total1, String tech2, String art2, String espace2, String style2, String originalite2, String total2) {
+    public Battle(int id, String myTameName, String otherTeamName, String nbRounds, String tech1, String art1, String espace1, String style1, String originalite1, String total1, String tech2, String art2, String espace2, String style2, String originalite2, String total2, String latitude, String longitude) {
         this.id = id;
         this.myTameName = myTameName;
         this.otherTeamName = otherTeamName;
@@ -36,6 +38,8 @@ public class Battle {
         this.style2 = style2;
         this.originalite2 = originalite2;
         this.total2 = total2;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getId() {
@@ -165,4 +169,28 @@ public class Battle {
     public void setTotal2(String total2) {
         this.total2 = total2;
     }
+
+    public void setLatitude(String latitude)
+    {
+        this.latitude=latitude;
+    }
+
+    public String getLatitude()
+    {
+        return this.latitude;
+    }
+
+    public void setLongitude(String longitude)
+    {
+        this.longitude=longitude;
+    }
+
+    public String getLongitude()
+    {
+        return this.longitude;
+    }
+
+
+
+
 }
