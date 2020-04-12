@@ -93,9 +93,13 @@ public class Match extends AppCompatActivity {
             cal2.setText(cursor.getString(14));
             latitude.setText("latitude : "+ cursor.getString(15));
             longitude.setText("longitude : "+cursor.getString(16));
-            Bitmap img_en_tableau_de_bytes_tmp = BitmapFactory.decodeByteArray(cursor.getBlob(17), 0, cursor.getBlob(17).length); //On retransforme le tab de bytes en BITMAP
-            imgView.setImageBitmap(img_en_tableau_de_bytes_tmp); //On peut maintenant set l'image view avec la bitmap
-
+            if(cursor.getBlob(17) != null){
+                Bitmap img_en_tableau_de_bytes_tmp = BitmapFactory.decodeByteArray(cursor.getBlob(17), 0, cursor.getBlob(17).length); //On retransforme le tab de bytes en BITMAP
+                imgView.setImageBitmap(img_en_tableau_de_bytes_tmp); //On peut maintenant set l'image view avec la bitmap
+            }
+            else if(cursor.getBlob(17) == null){
+                imgView.setImageResource(R.drawable.ic_image_black_24dp);
+            }
 
             String Sscore = cursor.getString(8) + " - " + cursor.getString(14);
             score.setText(Sscore);
