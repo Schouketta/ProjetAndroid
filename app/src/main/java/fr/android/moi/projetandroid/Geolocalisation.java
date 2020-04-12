@@ -223,6 +223,7 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
         values.put(SQLite.FeedEntry.COLUMN_NAME_TOTAL_2, intent.getStringExtra(Add2.EXTRA_TOTAL2));
         values.put(SQLite.FeedEntry.COLUMN_NAME_LATITUDE, latitude);
         values.put(SQLite.FeedEntry.COLUMN_NAME_LONGITUDE, longitude);
+        //values.put(SQLite.FeedEntry.COLUMN_NAME_IMAGE, intent.getByteArrayExtra(SQLite.FeedEntry.COLUMN_NAME_IMAGE));
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SQLite.FeedEntry.TABLE_NAME, null, values);

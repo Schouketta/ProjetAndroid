@@ -8,6 +8,8 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaActionSound;
 import android.net.Uri;
 import android.os.Build;
@@ -18,8 +20,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+
 public class Camera extends AppCompatActivity {
 
+    public static final String EXTRA_PHOTO = "fr.android.moi.projetandroid.extra.EXTRA_PHOTO";
 
     Button btnPrendrePhoto;
     Button btnSuivant;
@@ -33,6 +38,7 @@ public class Camera extends AppCompatActivity {
     Intent intent;
 
     Uri image_uri;
+    byte[] img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,18 +145,22 @@ public class Camera extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /*if(resultCode == RESULT_OK){
-            //set the image captured to our ImageView
-            imageViewCamera.setImageURI(image_uri);
-        }*/
+
+        //img = new byte[0];
 
         //PICk_IMAGE sert à savoir si on a bien ouvert la galerie
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             //l'image sur laquelle on clique dans la galerie devient l'image selectionnée
             image_uri=data.getData();
             imageViewCamera.setImageURI(image_uri);
-        }
 
+            /*
+            //decomposer l'img en matrice d'octets
+            Bitmap b = ((BitmapDrawable)imageViewCamera.getDrawable()).getBitmap();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            b.compress(Bitmap.CompressFormat.JPEG, 25, bos);
+            img = bos.toByteArray();*/
+        }
     }
 
     public void goToGeoloc(){
@@ -169,6 +179,7 @@ public class Camera extends AppCompatActivity {
         intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_ORIGINAL2, intent.getStringExtra(Add2.EXTRA_ORIGINAL2));
         intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_STYLE1, intent.getStringExtra(Add2.EXTRA_STYLE1));
         intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_STYLE2, intent.getStringExtra(Add2.EXTRA_STYLE2));
+        //intent_from_Camera_to_Geoloc.putExtra(EXTRA_PHOTO, img);
         startActivity(intent_from_Camera_to_Geoloc);
 
 
