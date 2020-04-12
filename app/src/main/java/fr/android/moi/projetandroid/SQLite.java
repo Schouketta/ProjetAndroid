@@ -32,7 +32,7 @@ public class SQLite {
         public static final String COLUMN_NAME_TOTAL_2 = "total2";
         public static final String COLUMN_NAME_LATITUDE = "latitude";
         public static final String COLUMN_NAME_LONGITUDE = "longitude";
-        //public static final String COLUMN_NAME_IMAGE = "image";
+        public static final String COLUMN_NAME_IMAGE = "image";
 
     }
 
@@ -54,8 +54,8 @@ public class SQLite {
                     FeedEntry.COLUMN_NAME_ORIGINALITE_2 + " TEXT," +
                     FeedEntry.COLUMN_NAME_TOTAL_2 + " TEXT," +
                     FeedEntry.COLUMN_NAME_LATITUDE + " TEXT," +
-                    FeedEntry.COLUMN_NAME_LONGITUDE + " TEXT)";
-                    //FeedEntry.COLUMN_NAME_IMAGE + " BLOB)";
+                    FeedEntry.COLUMN_NAME_LONGITUDE + " TEXT," +
+                    FeedEntry.COLUMN_NAME_IMAGE + " BLOB)";
 
 
     private static final String SQL_DELETE_ENTRIES =

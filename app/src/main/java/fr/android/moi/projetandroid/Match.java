@@ -93,8 +93,8 @@ public class Match extends AppCompatActivity {
             cal2.setText(cursor.getString(14));
             latitude.setText("latitude : "+ cursor.getString(15));
             longitude.setText("longitude : "+cursor.getString(16));
-           // Bitmap img_en_tableau_de_bytes_tmp = BitmapFactory.decodeByteArray(cursor.getBlob(17), 0, cursor.getBlob(17).length);
-            //imgView.setImageBitmap(img_en_tableau_de_bytes_tmp);
+            Bitmap img_en_tableau_de_bytes_tmp = BitmapFactory.decodeByteArray(cursor.getBlob(17), 0, cursor.getBlob(17).length); //On retransforme le tab de bytes en BITMAP
+            imgView.setImageBitmap(img_en_tableau_de_bytes_tmp); //On peut maintenant set l'image view avec la bitmap
 
 
             String Sscore = cursor.getString(8) + " - " + cursor.getString(14);
