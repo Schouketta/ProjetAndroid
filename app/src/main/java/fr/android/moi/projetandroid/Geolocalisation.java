@@ -201,6 +201,8 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
     public void goToMatch() {
         Intent intent_from_Geoloc_to_Match = new Intent(this, Match.class);
 
+        intent_from_Geoloc_to_Match.putExtra(Add.EXTRA_TEAM_NAME, intent.getStringExtra(Add.EXTRA_TEAM_NAME));
+        intent_from_Geoloc_to_Match.putExtra(Add.EXTRA_TEAM_NAME_OTHER, intent.getStringExtra(Add.EXTRA_TEAM_NAME_OTHER));
 
         // Gets the data repository in write mode
         SQLiteDatabase db = DB.getWritableDatabase();
@@ -223,6 +225,7 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
         values.put(SQLite.FeedEntry.COLUMN_NAME_TOTAL_2, intent.getStringExtra(Add2.EXTRA_TOTAL2));
         values.put(SQLite.FeedEntry.COLUMN_NAME_LATITUDE, latitude);
         values.put(SQLite.FeedEntry.COLUMN_NAME_LONGITUDE, longitude);
+        values.put(SQLite.FeedEntry.COLUMN_NAME_IMAGE, intent.getByteArrayExtra(Camera.EXTRA_PHOTO)); //l'image (tab de bytes)
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SQLite.FeedEntry.TABLE_NAME, null, values);

@@ -8,6 +8,8 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaActionSound;
 import android.net.Uri;
 import android.os.Build;
@@ -18,8 +20,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+
 public class Camera extends AppCompatActivity {
 
+    public static final String EXTRA_PHOTO = "fr.android.moi.projetandroid.extra.EXTRA_PHOTO";
 
     Button btnPrendrePhoto;
     Button btnSuivant;
@@ -31,8 +36,10 @@ public class Camera extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
 
     Intent intent;
-
     Uri image_uri;
+
+    //Déclaration variable pour savePhoto
+    byte[] img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,18 +146,23 @@ public class Camera extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /*if(resultCode == RESULT_OK){
-            //set the image captured to our ImageView
-            imageViewCamera.setImageURI(image_uri);
-        }*/
+
+        //img est le tableau d'octets(bytes), on l'initialise
+        img = new byte[0];
 
         //PICk_IMAGE sert à savoir si on a bien ouvert la galerie
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             //l'image sur laquelle on clique dans la galerie devient l'image selectionnée
             image_uri=data.getData();
-            imageViewCamera.setImageURI(image_uri);
-        }
+            imageViewCamera.setImageURI(image_uri); //L'image affichée dans ImageView
 
+
+            //Décomposer l'img en matrice de bytes (octets)
+            Bitmap b = ((BitmapDrawable)imageViewCamera.getDrawable()).getBitmap(); //Création d'une bitmap
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(); //Initialisation du tableau de bytes
+            b.compress(Bitmap.CompressFormat.JPEG, 25, bos); //On transforme le bitmap b en JPEG grâce au tableau de bytes bos
+            img = bos.toByteArray(); //img prend la valeur du tableau de bytes
+        }
     }
 
     public void goToGeoloc(){
@@ -169,6 +181,7 @@ public class Camera extends AppCompatActivity {
         intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_ORIGINAL2, intent.getStringExtra(Add2.EXTRA_ORIGINAL2));
         intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_STYLE1, intent.getStringExtra(Add2.EXTRA_STYLE1));
         intent_from_Camera_to_Geoloc.putExtra(Add2.EXTRA_STYLE2, intent.getStringExtra(Add2.EXTRA_STYLE2));
+        intent_from_Camera_to_Geoloc.putExtra(EXTRA_PHOTO, img); //on fait passer de Camera.java à Geoloc.java, l'iamge sous forme de tableau de bytes
         startActivity(intent_from_Camera_to_Geoloc);
 
 

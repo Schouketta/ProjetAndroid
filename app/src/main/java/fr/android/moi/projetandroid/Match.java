@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +26,9 @@ public class Match extends AppCompatActivity {
     TextView score, winner, teams, latitude, longitude;
     TextView team1, tech1, art1, espace1, style1, original1, cal1;
     TextView team2, tech2, art2, espace2, style2, original2, cal2;
+
+
+    ImageView imgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +59,7 @@ public class Match extends AppCompatActivity {
         latitude = (TextView) findViewById(R.id.latitude);
         longitude = (TextView) findViewById(R.id.longitude);
 
-
+        imgView = (ImageView) findViewById(R.id.imgMatch);
 
 
         Intent intent = getIntent();
@@ -87,6 +93,9 @@ public class Match extends AppCompatActivity {
             cal2.setText(cursor.getString(14));
             latitude.setText("latitude : "+ cursor.getString(15));
             longitude.setText("longitude : "+cursor.getString(16));
+            Bitmap img_en_tableau_de_bytes_tmp = BitmapFactory.decodeByteArray(cursor.getBlob(17), 0, cursor.getBlob(17).length); //On retransforme le tab de bytes en BITMAP
+            imgView.setImageBitmap(img_en_tableau_de_bytes_tmp); //On peut maintenant set l'image view avec la bitmap
+
 
             String Sscore = cursor.getString(8) + " - " + cursor.getString(14);
             score.setText(Sscore);
@@ -104,8 +113,6 @@ public class Match extends AppCompatActivity {
             }
 
         }
-
-
 
     }
 }
