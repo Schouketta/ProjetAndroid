@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DanceTracker</string>
+    <string name="add">Add</string>
+    <string name="addBattle">Add a battle</string>
+    <string name="addBattleTitle">Add a new battle</string>
+    <string name="artistique">Artistic</string>
+    <string name="battle">Battle</string>
+    <string name="camera">Camera</string>
+    <string name="error">error</string>
+    <string name="espace">"Space "</string>
+    <string name="history">History</string>
+    <string name="matchTitle">Battle informations</string>
+    <string name="myTeam">Team 1</string>
+    <string name="originalité">Originality</string>
+    <string name="ouvrir_photo_gallery">Open Photo Gallery</string>
+    <string name="prendre_photo">Take photo</string>
+    <string name="round">Number of round</string>
+    <string name="sauvegarder_battle">Save Battle</string>
+    <string name="stats">Stats</string>
+    <string name="style">Different  styles</string>
+    <string name="suivant">Next</string>
+    <string name="team1">Team 1</string>
+    <string name="teams">Teams</string>
+    <string name="technique">Technical</string>
+    <string name="theOtherTeam">Team 2</string>
+    <string name="title_activity_geolocalisation">Map</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="total">Total</string>
+    <string name="winner">"The winner is : "</string>
+</resources>

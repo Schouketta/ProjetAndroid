@@ -14,7 +14,8 @@
     <string name="matchTitle">Match</string>
     <string name="winner">Winner</string>
 
-    <!-- Sarah Fong--> <string name="title_activity_maps">Map</string>
+    <!-- Sarah Fong-->
+    <string name="title_activity_maps">Map</string>
 
     <string name="title_activity_geolocalisation">Map</string>
     <string name="prendre_photo">Prendre Photo</string>
@@ -25,5 +26,9 @@
     <string name="team1">Team1</string>
     <string name="error">error</string>
     <string name="battle">Battle</string>
+    <string name="add">Add</string>
+    <string name="history">History</string>
+    <string name="camera">Camera</string>
+    <string name="stats">Stats</string>
 
 </resources>
