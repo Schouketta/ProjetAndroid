@@ -51,7 +51,7 @@ public class bddExterne_getOneBattle extends Activity {
 
     /**
      * Background Async Task to Get complete product details
-     * */
+     */
     class GetProductDetails extends AsyncTask<String, String, String> {
 
         //Before starting background thread Show Progress Dialog
@@ -94,7 +94,7 @@ public class bddExterne_getOneBattle extends Activity {
                             JSONObject product = productObj.getJSONObject(0);
 
 
-                        }else{
+                        } else {
                             // battle with id not found
                         }
                     } catch (JSONException e) {

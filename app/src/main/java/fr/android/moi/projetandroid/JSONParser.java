@@ -46,8 +46,7 @@ public class JSONParser {
             if (method.equalsIgnoreCase("POST"))
             {
                 // request method is POST
-                Log.d("POSTSARAH", "POST ENTRER!!!");
-
+                //Log.d("POSTSARAH", "POST ENTRER!!!");
                 DefaultHttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(url);
                 httpPost.setEntity(new UrlEncodedFormEntity(params));
@@ -59,13 +58,12 @@ public class JSONParser {
             else if (method.equalsIgnoreCase("GET"))
             {
                 // request method is GET
-                Log.d("GETSARAH", "GET ENTRER!!!");
+                //Log.d("GETSARAH", "GET ENTRER!!!");
                 // request method is GET
                 DefaultHttpClient httpClient = new DefaultHttpClient();
                 String paramString = URLEncodedUtils.format(params, "utf-8");
                 url += "?" + paramString;
                 HttpGet httpGet = new HttpGet(url);
-
 
                 try {
                     HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -77,7 +75,6 @@ public class JSONParser {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
 
             }
 

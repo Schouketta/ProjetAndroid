@@ -68,26 +68,22 @@ public class Camera extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //si le systeme OS est >= marshmallow, request runtime pemrission
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                {
-                    if(checkSelfPermission(Manifest.permission.CAMERA)==
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.CAMERA) ==
                             PackageManager.PERMISSION_DENIED ||
                             checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                            PackageManager.PERMISSION_DENIED)
-                    {
+                                    PackageManager.PERMISSION_DENIED) {
                         //Permission not enabled, request it
                         String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                         //show popup to request permission
-                        requestPermissions(permission,PERMISSION_CODE );
+                        requestPermissions(permission, PERMISSION_CODE);
 
-                    }
-                    else{
+                    } else {
                         //permission already
                         openCamera();
 
                     }
-                }
-                else{
+                } else {
                     //system os < marshmallow
                     openCamera();
                 }
@@ -102,22 +98,22 @@ public class Camera extends AppCompatActivity {
         });
     }
 
-    private void openGallery(){
-        Intent gallery = new Intent (Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
 
-    private void openCamera(){
+    private void openCamera() {
 
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera");
-        image_uri=getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         //Camera intent
-        Intent cameraIntent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
-        startActivityForResult(cameraIntent,IMAGE_CAPTURE_CODE);
+        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
     }
 
 
@@ -126,17 +122,15 @@ public class Camera extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch(requestCode){
-            case PERMISSION_CODE :{
-                if(grantResults.length > 0 && grantResults[0] ==
-                    PackageManager.PERMISSION_GRANTED){
+        switch (requestCode) {
+            case PERMISSION_CODE: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
                     //permission from popup was granted
                     openCamera();
-                }
-                else
-                {
+                } else {
                     //permission from popup was denied
-                    Toast.makeText(this,"Permission denied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -151,21 +145,21 @@ public class Camera extends AppCompatActivity {
         img = new byte[0];
 
         //PICk_IMAGE sert à savoir si on a bien ouvert la galerie
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             //l'image sur laquelle on clique dans la galerie devient l'image selectionnée
-            image_uri=data.getData();
+            image_uri = data.getData();
             imageViewCamera.setImageURI(image_uri); //L'image affichée dans ImageView
 
 
             //Décomposer l'img en matrice de bytes (octets)
-            Bitmap b = ((BitmapDrawable)imageViewCamera.getDrawable()).getBitmap(); //Création d'une bitmap
+            Bitmap b = ((BitmapDrawable) imageViewCamera.getDrawable()).getBitmap(); //Création d'une bitmap
             ByteArrayOutputStream bos = new ByteArrayOutputStream(); //Initialisation du tableau de bytes
             b.compress(Bitmap.CompressFormat.JPEG, 25, bos); //On transforme le bitmap b en JPEG grâce au tableau de bytes bos
             img = bos.toByteArray(); //img prend la valeur du tableau de bytes
         }
     }
 
-    public void goToGeoloc(){
+    public void goToGeoloc() {
         Intent intent_from_Camera_to_Geoloc = new Intent(this, Geolocalisation.class);
         intent_from_Camera_to_Geoloc.putExtra(Add.EXTRA_TEAM_NAME, intent.getStringExtra(Add.EXTRA_TEAM_NAME));
         intent_from_Camera_to_Geoloc.putExtra(Add.EXTRA_TEAM_NAME_OTHER, intent.getStringExtra(Add.EXTRA_TEAM_NAME_OTHER));

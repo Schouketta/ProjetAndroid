@@ -81,7 +81,6 @@ public class Add2 extends AppCompatActivity {
         team2.setText(nameTeam2);
 
 
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -116,15 +115,15 @@ public class Add2 extends AppCompatActivity {
                 intent.putExtra(EXTRA_TECH2, Stech2);
                 intent.putExtra(EXTRA_ESPACE1, Sespace1);
                 intent.putExtra(EXTRA_ESPACE2, Sespace2);
-                intent.putExtra(EXTRA_ART1,Sart1 );
-                intent.putExtra(EXTRA_ART2, Sart2 );
+                intent.putExtra(EXTRA_ART1, Sart1);
+                intent.putExtra(EXTRA_ART2, Sart2);
                 intent.putExtra(EXTRA_STYLE1, Sstyle1);
                 intent.putExtra(EXTRA_STYLE2, Sstyle2);
                 intent.putExtra(EXTRA_ORIGINAL1, Soriginal1);
                 intent.putExtra(EXTRA_ORIGINAL2, Soriginal2);
-            startActivity(intent);
+                startActivity(intent);
 
-        }
+            }
         });
 
     }

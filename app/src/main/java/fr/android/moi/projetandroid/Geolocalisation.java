@@ -68,7 +68,7 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
      * Variables nécessaires pour save dans BDD EXETERNE
      */
     String id_battle;
-    String team1, team2, tech1, tech2, style1, style2, art1,art2,originalite1, originalite2,espace1, espace2, total1,total2, lati, longi;
+    String team1, team2, tech1, tech2, style1, style2, art1, art2, originalite1, originalite2, espace1, espace2, total1, total2, lati, longi;
     private ProgressDialog pDialog;
     JSONParser jsonParser = new JSONParser(); // JSON parser class
 
@@ -79,23 +79,22 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_BATLLES = "battles";
     private static final String TAG_ID = "id";
-    private static final String TAG_Team1= "team1";
-    private static final String TAG_Team2= "team2";
-    private static final String TAG_TOTAL1= "total1";
-    private static final String TAG_TOTAL2= "total2";
-    private static final String TAG_TECH1= "tech1";
-    private static final String TAG_TECH2= "tech2";
-    private static final String TAG_ART1= "art1";
-    private static final String TAG_ART2= "art2";
-    private static final String TAG_ESPACE1= "espace1";
-    private static final String TAG_ESPACE2= "espace2";
-    private static final String TAG_STYLE1= "style1";
-    private static final String TAG_STYLE2= "style2";
-    private static final String TAG_ORIGINALITE1= "originalite1";
-    private static final String TAG_ORIGINALITE2= "originalite2";
-    private static final String TAG_LATITUDE= "latitude";
-    private static final String TAG_LONGITUDE= "longitude";
-
+    private static final String TAG_Team1 = "team1";
+    private static final String TAG_Team2 = "team2";
+    private static final String TAG_TOTAL1 = "total1";
+    private static final String TAG_TOTAL2 = "total2";
+    private static final String TAG_TECH1 = "tech1";
+    private static final String TAG_TECH2 = "tech2";
+    private static final String TAG_ART1 = "art1";
+    private static final String TAG_ART2 = "art2";
+    private static final String TAG_ESPACE1 = "espace1";
+    private static final String TAG_ESPACE2 = "espace2";
+    private static final String TAG_STYLE1 = "style1";
+    private static final String TAG_STYLE2 = "style2";
+    private static final String TAG_ORIGINALITE1 = "originalite1";
+    private static final String TAG_ORIGINALITE2 = "originalite2";
+    private static final String TAG_LATITUDE = "latitude";
+    private static final String TAG_LONGITUDE = "longitude";
 
 
     @Override
@@ -149,9 +148,11 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        {
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            {
                 mLocationPermissionsGranted = true;
                 initMap();
             } else {
@@ -179,13 +180,15 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
 
-        if (mLocationPermissionsGranted) {
+        if (mLocationPermissionsGranted)
+        {
             //Pour avoir la localisation du téléphone
             getDeviceLocation();
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
                 return;
             }
             mMap.setMyLocationEnabled(true);
@@ -200,7 +203,8 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         try {
-            if (mLocationPermissionsGranted) {
+            if (mLocationPermissionsGranted)
+            {
                 //get localisation de mon tél
                 final Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
@@ -209,7 +213,8 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
                     @Override
                     public void onComplete(@NonNull Task task) {
                         //si la tache a été accomplie avec succès
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful())
+                        {
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
 
@@ -244,11 +249,16 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
         Log.d(TAG, "onRequestPermissionsResult: called.");
         mLocationPermissionsGranted = false;
 
-        switch (requestCode) {
-            case LOCATION_PERMISSION_REQUEST_CODE: {
-                if (grantResults.length > 0) {
-                    for (int i = 0; i < grantResults.length; i++) {
-                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+        switch (requestCode)
+        {
+            case LOCATION_PERMISSION_REQUEST_CODE:
+                {
+                if (grantResults.length > 0)
+                {
+                    for (int i = 0; i < grantResults.length; i++)
+                    {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED)
+                        {
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return; //on quitte la méthode
@@ -302,7 +312,8 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
 
         Cursor cursor = DB.getData();
 
-        while (cursor.getCount() > 5 && cursor.getCount() != 5) {
+        while (cursor.getCount() > 5 && cursor.getCount() != 5)
+        {
             cursor = DB.deleteData();
             cursor = DB.getData();
         }
@@ -326,9 +337,7 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
      */
     class SaveProductDetails extends AsyncTask<String, String, String> {
 
-        /**
-         * Before starting background thread Show Progress Dialog
-         * */
+        // Before starting background thread Show Progress Dialog
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -339,17 +348,14 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
             pDialog.show();
         }
 
-        /**
-         * Saving product
-         * */
-        protected String doInBackground(String... args) {
-
-
+        // Saving battles
+        protected String doInBackground(String... args)
+        {
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair(TAG_ID, id_battle));
-            params.add(new BasicNameValuePair(TAG_Team1,intent.getStringExtra(Add.EXTRA_TEAM_NAME)));
+            params.add(new BasicNameValuePair(TAG_Team1, intent.getStringExtra(Add.EXTRA_TEAM_NAME)));
             params.add(new BasicNameValuePair(TAG_Team2, intent.getStringExtra(Add.EXTRA_TEAM_NAME_OTHER)));
             params.add(new BasicNameValuePair(TAG_TOTAL1, intent.getStringExtra(Add2.EXTRA_TOTAL1)));
             params.add(new BasicNameValuePair(TAG_TOTAL2, intent.getStringExtra(Add2.EXTRA_TOTAL2)));
@@ -369,43 +375,31 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
 
             // sending modified data through http request
             // Notice that update product url accepts POST method
-            JSONObject json = jsonParser.makeHttpRequest(url_insertInto_battles,"POST", params);
-            if(json == null)
-            {
-                Log.d("JSONPOST", "jsonPOST est nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuul");
+            JSONObject json = jsonParser.makeHttpRequest(url_insertInto_battles, "POST", params);
+            if (json == null) {
+                //Log.d("JSONPOST", "jsonPOST est nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuul");
             }
 
-            // check json success tag
-            /*try {
-                int success = json.getInt(TAG_SUCCESS);
-
-                if (success == 1) {*/
-                    // successfully updated
-                    Intent i = getIntent();
-            Log.d("JSONPOST", "jsonPOST est PAAAAS nuuuuuuuuuuuuuuuuuuuul");
+            // successfully updated
+            Intent i = getIntent();
+            //Log.d("JSONPOST", "jsonPOST est PAAAAS nuuuuuuuuuuuuuuuuuuuul");
 
             // send result code 100 to notify about product update
-                    setResult(100, i);
-                    finish();
-                /*} else {
-                    // failed to add a new battle
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }*/
+            setResult(100, i);
+            finish();
+
 
             return null;
         }
 
         /**
          * After completing background task Dismiss the progress dialog
-         * **/
+         **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product uupdated
             pDialog.dismiss();
         }
     }
-
 
 
 }

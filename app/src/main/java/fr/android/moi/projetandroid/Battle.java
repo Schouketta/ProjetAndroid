@@ -170,27 +170,21 @@ public class Battle {
         this.total2 = total2;
     }
 
-    public void setLatitude(String latitude)
-    {
-        this.latitude=latitude;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
-    public String getLatitude()
-    {
+    public String getLatitude() {
         return this.latitude;
     }
 
-    public void setLongitude(String longitude)
-    {
-        this.longitude=longitude;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
-    public String getLongitude()
-    {
+    public String getLongitude() {
         return this.longitude;
     }
-
-
 
 
 }
