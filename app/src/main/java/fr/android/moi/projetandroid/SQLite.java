@@ -15,24 +15,24 @@ public class SQLite {
 
     /* Inner class that defines the table contents */
     public static class FeedEntry implements BaseColumns {
-        public static final String TABLE_NAME = "battleDB";
-        public static final String COLUMN_NAME_MY_TEAM = "myTeamName";
-        public static final String COLUMN_NAME_OTHER_TEAM = "otherTeamName";
-        public static final String COLUMN_NAME_TECH_1 = "tech1";
-        public static final String COLUMN_NAME_ART_1 = "art1";
-        public static final String COLUMN_NAME_ESPACE_1 = "espace1";
-        public static final String COLUMN_NAME_STYLE_1 = "style1";
-        public static final String COLUMN_NAME_ORIGINALITE_1 = "originalite1";
-        public static final String COLUMN_NAME_TOTAL_1 = "total1";
-        public static final String COLUMN_NAME_TECH_2 = "tech2";
-        public static final String COLUMN_NAME_ART_2 = "art2";
-        public static final String COLUMN_NAME_ESPACE_2 = "espace2";
-        public static final String COLUMN_NAME_STYLE_2 = "style2";
-        public static final String COLUMN_NAME_ORIGINALITE_2 = "originalite2";
-        public static final String COLUMN_NAME_TOTAL_2 = "total2";
-        public static final String COLUMN_NAME_LATITUDE = "latitude";
-        public static final String COLUMN_NAME_LONGITUDE = "longitude";
-        public static final String COLUMN_NAME_IMAGE = "image";
+    public static final String TABLE_NAME = "battleDB";
+    public static final String COLUMN_NAME_MY_TEAM = "myTeamName";
+    public static final String COLUMN_NAME_OTHER_TEAM = "otherTeamName";
+    public static final String COLUMN_NAME_TECH_1 = "tech1";
+    public static final String COLUMN_NAME_ART_1 = "art1";
+    public static final String COLUMN_NAME_ESPACE_1 = "espace1";
+    public static final String COLUMN_NAME_STYLE_1 = "style1";
+    public static final String COLUMN_NAME_ORIGINALITE_1 = "originalite1";
+    public static final String COLUMN_NAME_TOTAL_1 = "total1";
+    public static final String COLUMN_NAME_TECH_2 = "tech2";
+    public static final String COLUMN_NAME_ART_2 = "art2";
+    public static final String COLUMN_NAME_ESPACE_2 = "espace2";
+    public static final String COLUMN_NAME_STYLE_2 = "style2";
+    public static final String COLUMN_NAME_ORIGINALITE_2 = "originalite2";
+    public static final String COLUMN_NAME_TOTAL_2 = "total2";
+    public static final String COLUMN_NAME_LATITUDE = "latitude";
+    public static final String COLUMN_NAME_LONGITUDE = "longitude";
+    public static final String COLUMN_NAME_IMAGE = "image";
 
     }
 
@@ -105,23 +105,6 @@ public class SQLite {
             db.execSQL(query);
             return data;
         }
-
-        public Cursor getLeo(){
-            SQLiteDatabase db = this.getWritableDatabase();
-            String query = "SELECT tech1 FROM battleDB WHERE myTeamName = 'lea' AND otherTeamName = 'leo'";
-            Cursor leolea = db.rawQuery(query, null);
-            return leolea;
-
-        }
-
-        /*cursor = DB.getLeo();
-
-        while(cursor.moveToNext()){
-
-            Log.d("techTest", cursor.getString(0));
-            //Log.d("techTest1", cursor.getString(1));
-
-        }*/
 
     }
 

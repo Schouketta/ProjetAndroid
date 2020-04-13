@@ -57,33 +57,24 @@ public class MainActivity extends AppCompatActivity {
                 String message = adapterView.getItemAtPosition(i).toString();
 
                 String[] separated = message.split("\\|");
-                String danseurs = separated[0].trim(); // this will contain "Fruit"
-                String score = separated[1].trim(); // this will contain " they taste good"
+                String danseurs = separated[0].trim();
+                String score = separated[1].trim();
 
                 String[] separatedDanseurs = danseurs.split("vs");
-                String myTeamName = separatedDanseurs[0].trim(); // this will contain "Fruit"
-                String otherTeamName = separatedDanseurs[1].trim(); // this will contain " they taste good"
+                String myTeamName = separatedDanseurs[0].trim();
+                String otherTeamName = separatedDanseurs[1].trim();
 
                 String[] separatedScore = score.split("\\-");
-                String total = separatedScore[0].trim(); // this will contain "Fruit"
-                String total2 = separatedScore[1].trim(); // this will contain " they taste good"
+                String total = separatedScore[0].trim();
+                String total2 = separatedScore[1].trim();
 
                 String[] separatedTotal1 = total.split(":");
-                total = separatedScore[0].trim(); // this will contain "Fruit"
-                String total1 = separatedScore[1].trim(); // this will contain " they taste good"
-                /*Log.d("message", message);
-                Log.d("danseurs", danseurs);
-                Log.d("score", score);
-                Log.d("myTeamName", myTeamName);
-                Log.d("otherTeamName", otherTeamName);
-                Log.d("total1", total1);
-                Log.d("total2", total2);*/
+                total = separatedScore[0].trim();
+                String total1 = separatedScore[1].trim();
 
                 Intent intent = new Intent(MainActivity.this, Match.class);
                 intent.putExtra(Add.EXTRA_TEAM_NAME, myTeamName);
                 intent.putExtra(Add.EXTRA_TEAM_NAME_OTHER, otherTeamName);
-                //intent.putExtra("total1", total1);
-                //intent.putExtra("total2", total2);
                 startActivity(intent); //lance le passage à l'activity Match
             }
         });

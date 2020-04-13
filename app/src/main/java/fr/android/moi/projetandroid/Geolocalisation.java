@@ -2,12 +2,14 @@ package fr.android.moi.projetandroid;
 
 import android.*;
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +25,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,6 +64,39 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
     private String longitude;
     private String latitude;
 
+    /**
+     * Variables nécessaires pour save dans BDD EXETERNE
+     */
+    String id_battle;
+    String team1, team2, tech1, tech2, style1, style2, art1,art2,originalite1, originalite2,espace1, espace2, total1,total2, lati, longi;
+    private ProgressDialog pDialog;
+    JSONParser jsonParser = new JSONParser(); // JSON parser class
+
+    // url pour save une battle avec bdd EXTERNE
+    private static final String url_insertInto_battles = "http://10.0.2.2/ProjetAndroidBddExterne/saveInBddExterne.php/";
+
+    // JSON Node names
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_BATLLES = "battles";
+    private static final String TAG_ID = "id";
+    private static final String TAG_Team1= "team1";
+    private static final String TAG_Team2= "team2";
+    private static final String TAG_TOTAL1= "total1";
+    private static final String TAG_TOTAL2= "total2";
+    private static final String TAG_TECH1= "tech1";
+    private static final String TAG_TECH2= "tech2";
+    private static final String TAG_ART1= "art1";
+    private static final String TAG_ART2= "art2";
+    private static final String TAG_ESPACE1= "espace1";
+    private static final String TAG_ESPACE2= "espace2";
+    private static final String TAG_STYLE1= "style1";
+    private static final String TAG_STYLE2= "style2";
+    private static final String TAG_ORIGINALITE1= "originalite1";
+    private static final String TAG_ORIGINALITE2= "originalite2";
+    private static final String TAG_LATITUDE= "latitude";
+    private static final String TAG_LONGITUDE= "longitude";
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,12 +107,34 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
         btnSauvegarderBattle = (Button) findViewById(R.id.btnSauvegarderBattle);
         DB = new SQLite.FeedReaderDbHelper(getApplicationContext());
 
+        // getting product details from intent
+        Intent i = getIntent();
+
+        // getting product id (pid) from intent
+        team1 = i.getStringExtra(TAG_Team1);
+        team2 = i.getStringExtra(TAG_Team2);
+        tech1 = i.getStringExtra(TAG_TECH1);
+        tech2 = i.getStringExtra(TAG_TECH2);
+        art1 = i.getStringExtra(TAG_ART1);
+        art2 = i.getStringExtra(TAG_ART2);
+        espace1 = i.getStringExtra(TAG_ESPACE1);
+        espace2 = i.getStringExtra(TAG_ESPACE2);
+        style1 = i.getStringExtra(TAG_STYLE1);
+        style2 = i.getStringExtra(TAG_STYLE2);
+        originalite1 = i.getStringExtra(TAG_ORIGINALITE1);
+        originalite2 = i.getStringExtra(TAG_ORIGINALITE2);
+        total1 = i.getStringExtra(TAG_TOTAL1);
+        total2 = i.getStringExtra(TAG_TOTAL2);
+        lati = i.getStringExtra(TAG_LATITUDE);
+        longi = i.getStringExtra(TAG_LONGITUDE);
+
         getLocationPermission();
 
         btnSauvegarderBattle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToMatch();
+                saveDansBddExterne(); //on save dans la bdd EXTERNE
+                goToMatch(); //on save dans bdd INTERNE + on change d'activity
             }
         });
     }
@@ -199,6 +264,10 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
     }
 
     public void goToMatch() {
+
+        /**
+         * Save dans bdd INTERNE (SQLite)
+         */
         Intent intent_from_Geoloc_to_Match = new Intent(this, Match.class);
 
         intent_from_Geoloc_to_Match.putExtra(Add.EXTRA_TEAM_NAME, intent.getStringExtra(Add.EXTRA_TEAM_NAME));
@@ -241,5 +310,102 @@ public class Geolocalisation extends AppCompatActivity implements OnMapReadyCall
         startActivity(intent_from_Geoloc_to_Match);
 
     }
+
+
+    public void saveDansBddExterne()
+    {
+        /**
+         * Save dans bdd EXTERNE
+         */
+
+        new SaveProductDetails().execute();
+    }
+
+    /**
+     * Background Async Task to  Save a battle
+     */
+    class SaveProductDetails extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(Geolocalisation.this);
+            pDialog.setMessage("Saving the new battle ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Saving product
+         * */
+        protected String doInBackground(String... args) {
+
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair(TAG_ID, id_battle));
+            params.add(new BasicNameValuePair(TAG_Team1,intent.getStringExtra(Add.EXTRA_TEAM_NAME)));
+            params.add(new BasicNameValuePair(TAG_Team2, intent.getStringExtra(Add.EXTRA_TEAM_NAME_OTHER)));
+            params.add(new BasicNameValuePair(TAG_TOTAL1, intent.getStringExtra(Add2.EXTRA_TOTAL1)));
+            params.add(new BasicNameValuePair(TAG_TOTAL2, intent.getStringExtra(Add2.EXTRA_TOTAL2)));
+            params.add(new BasicNameValuePair(TAG_TECH1, intent.getStringExtra(Add2.EXTRA_TECH1)));
+            params.add(new BasicNameValuePair(TAG_TECH2, intent.getStringExtra(Add2.EXTRA_TECH2)));
+            params.add(new BasicNameValuePair(TAG_ART1, intent.getStringExtra(Add2.EXTRA_ART1)));
+            params.add(new BasicNameValuePair(TAG_ART2, intent.getStringExtra(Add2.EXTRA_ART2)));
+            params.add(new BasicNameValuePair(TAG_ESPACE1, intent.getStringExtra(Add2.EXTRA_ESPACE1)));
+            params.add(new BasicNameValuePair(TAG_ESPACE2, intent.getStringExtra(Add2.EXTRA_ESPACE2)));
+            params.add(new BasicNameValuePair(TAG_STYLE1, intent.getStringExtra(Add2.EXTRA_STYLE1)));
+            params.add(new BasicNameValuePair(TAG_STYLE2, intent.getStringExtra(Add2.EXTRA_STYLE2)));
+            params.add(new BasicNameValuePair(TAG_ORIGINALITE1, intent.getStringExtra(Add2.EXTRA_ORIGINAL1)));
+            params.add(new BasicNameValuePair(TAG_ORIGINALITE2, intent.getStringExtra(Add2.EXTRA_ORIGINAL2)));
+            params.add(new BasicNameValuePair(TAG_LATITUDE, latitude));
+            params.add(new BasicNameValuePair(TAG_LONGITUDE, longitude));
+
+
+            // sending modified data through http request
+            // Notice that update product url accepts POST method
+            JSONObject json = jsonParser.makeHttpRequest(url_insertInto_battles,"POST", params);
+            if(json == null)
+            {
+                Log.d("JSONPOST", "jsonPOST est nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuul");
+            }
+
+            // check json success tag
+            /*try {
+                int success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {*/
+                    // successfully updated
+                    Intent i = getIntent();
+            Log.d("JSONPOST", "jsonPOST est PAAAAS nuuuuuuuuuuuuuuuuuuuul");
+
+            // send result code 100 to notify about product update
+                    setResult(100, i);
+                    finish();
+                /*} else {
+                    // failed to add a new battle
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }*/
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product uupdated
+            pDialog.dismiss();
+        }
+    }
+
+
 
 }
