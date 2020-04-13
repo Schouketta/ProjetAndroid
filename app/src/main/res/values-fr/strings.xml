@@ -28,4 +28,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="total">Total</string>
     <string name="winner">"Le gagnant est : "</string>
+    <string name="historique_des_battles_enregistr_es_sur_la_bdd_externe">Historique des battles enregistrées sur la bdd Externe :</string>
 </resources>
