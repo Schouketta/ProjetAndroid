@@ -48,28 +48,6 @@ public class Add2 extends AppCompatActivity {
     public static final String EXTRA_ORIGINAL2 = "fr.android.moi.projetandroid.extra.EXTRA_ORIGINAL2";
 
 
-    /*public void myClickHandler(View view) {
-
-        /*String tag = view.getTag().toString();
-
-        switch (tag) {
-            case "tech1":
-            case "art1":
-            case "espace1":
-            case "style1":
-            case "original1":
-                total = tech1.getSelectedItem().toString();
-                break;
-
-            default:
-                total1.setText(total);
-                break;
-        }
-
-        total = (int) tech1.getSelectedItem() + (int) art1.getSelectedItem() + (int) espace1.getSelectedItem() + (int) style1.getSelectedItem() + (int) original1.getSelectedItem() ;
-    }*/
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,39 +130,4 @@ public class Add2 extends AppCompatActivity {
     }
 }
 
-/*
- // Gets the data repository in write mode
-                SQLiteDatabase db = DB.getWritableDatabase();
-
-                // Create a new map of values, where column names are the keys
-                ContentValues values = new ContentValues();
-                values.put(SQLite.FeedEntry.COLUMN_NAME_MY_TEAM, nameTeam1);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_OTHER_TEAM, nameTeam2);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_TECH_1, Stech1);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_ART_1, Sart1);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_ESPACE_1, Sespace1);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_STYLE_1, Sstyle1);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_ORIGINALITE_1, Soriginal1);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_TOTAL_1, Scal1);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_TECH_2, Stech2);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_ART_2, Sart2);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_ESPACE_2, Sespace2);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_STYLE_2, Sstyle2);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_ORIGINALITE_2, Soriginal2);
-                values.put(SQLite.FeedEntry.COLUMN_NAME_TOTAL_2, Scal2);
-                Log.d("tech1", Stech1);
-                Log.d("tech2", Stech2);
-
-                // Insert the new row, returning the primary key value of the new row
-                long newRowId = db.insert(SQLite.FeedEntry.TABLE_NAME, null, values);
-                Toast.makeText(getApplicationContext(), "Battle added successfully!", Toast.LENGTH_SHORT).show();
-
-                Cursor cursor = DB.getData();
-
-                while (cursor.getCount() > 5 && cursor.getCount() != 5){
-                    cursor = DB.deleteData();
-                    cursor = DB.getData();
-                }
-
- */
 
