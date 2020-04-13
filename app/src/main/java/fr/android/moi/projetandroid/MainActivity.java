@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void historyOnClick(View view)
     {
-        Intent intent = new Intent(this, History.class);
+        Intent intent = new Intent(this, bddExterne.class);
         startActivity(intent); //lance le passage à l'activity History
     }
 
